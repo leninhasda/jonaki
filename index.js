@@ -13,27 +13,30 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
 
 // url logger
-app.use((req, res, next) => {
-    logger.info(req.method+' '+req.path);
-    next();
-});
+// app.use((req, res, next) => {
+//     logger.info(req.method+' '+req.path);
+//     next();
+// });
 
 // app routes
-app.use('/', require('./routes'));
+app.use(require('./routes'));
 
 // error handler
-app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError && err.status == 400) {
-        return res.sendStatus(400);
-    }
-    if (typeof err !== "undefined" && err !== null) {
-        logger.error(err.toString());
-        return res.sendStatus(500);
-    }
-});
+// app.use((err, req, res, next) => {
+//     if (err instanceof SyntaxError && err.status == 400) {
+//         return res.sendStatus(400);
+//     }
+//     if (typeof err !== "undefined" && err !== null) {
+//         logger.error(err.toString());
+//         return res.sendStatus(500);
+//     }
+// });
 
 // 404 handler
-app.use
+// app.use((req, res, next) => {
+//     let msg = req.method + ' ' + req.path + ' - Not found';
+//     return res.status(404).send(msg);
+// });
 
 let _port = 3000;
 const server = app.listen(_port, () => {
