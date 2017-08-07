@@ -14,7 +14,7 @@ app.use(express.static(__dirname+'/public'));
 
 // url logger
 // app.use((req, res, next) => {
-//     logger.info(req.method+' '+req.path);
+//     logger.info(req.methd+' '+req.path);
 //     next();
 // });
 
@@ -22,21 +22,23 @@ app.use(express.static(__dirname+'/public'));
 app.use(require('./routes'));
 
 // error handler
-// app.use((err, req, res, next) => {
-//     if (err instanceof SyntaxError && err.status == 400) {
-//         return res.sendStatus(400);
-//     }
-//     if (typeof err !== "undefined" && err !== null) {
-//         logger.error(err.toString());
-//         return res.sendStatus(500);
-//     }
-// });
+// todo add custom error page
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status == 400) {
+        return res.sendStatus(400);
+    }
+    if (typeof err !== "undefined" && err !== null) {
+        logger.error(err.toString());
+        return res.sendStatus(500);
+    }
+});
 
 // 404 handler
-// app.use((req, res, next) => {
-//     let msg = req.method + ' ' + req.path + ' - Not found';
-//     return res.status(404).send(msg);
-// });
+// todo add custom 404 page
+app.use((req, res, next) => {
+    let msg = req.method + ' ' + req.path + ' - Not found';
+    return res.status(404).send(msg);
+});
 
 let _port = 3000;
 const server = app.listen(_port, () => {
