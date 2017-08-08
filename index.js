@@ -3,12 +3,14 @@ const express = require('express');
 const moment = require('moment');
 const fs = require('fs');
 const logger = require('./utils/logger');
+const notFoundError = require('./utils/404-not-found');
 
 const app = express();
 
 // app.engine('md', remarkable(app));
 app.set('views', __dirname + '/posts');
 // app.set('view engine', 'md');
+// app.set('view engine', require('pug'));
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
 
@@ -19,7 +21,11 @@ app.use(express.static(__dirname+'/public'));
 // });
 
 // app routes
-app.use(require('./routes'));
+// app.use(require('./routes')(app));
+app.use('/',       require('./routes/home'));
+app.use('/post',   require('./routes/post'));
+app.use('/tag',    require('./routes/tag'));
+app.use('/search', require('./routes/search'));
 
 // error handler
 // todo add custom error page
@@ -34,10 +40,8 @@ app.use((err, req, res, next) => {
 });
 
 // 404 handler
-// todo add custom 404 page
 app.use((req, res, next) => {
-    let msg = req.method + ' ' + req.path + ' - Not found';
-    return res.status(404).send(msg);
+    return notFoundError(req, res);
 });
 
 let _port = 3000;

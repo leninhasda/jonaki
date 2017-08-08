@@ -15,6 +15,8 @@ Simple markdown blog in node + express.
 - [ ] theming
 - [ ] auto fetch md files
 - [ ] custom error handling
+    - [x] 404 error
+    - [ ] 500 error
 - [ ] custom error page
 - [ ] add test
 - [ ] md renderer

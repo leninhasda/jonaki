@@ -1,9 +1,20 @@
+const fs = require('fs');
 const express = require('express');
-const app = express.Router();
+const router = express.Router();
 
-app
-.get('/:slug', (req, res, next) => {
-    return res.send(req.params.slug + ' should be loaded here');
+const notFoundError = require('../utils/404-not-found');
+
+router.get('/:slug', (req, res, next) => {
+    let slug = req.params.slug.trim();
+
+    let filePath = req.app.get('views') + '/' + slug + '.md';
+
+    if ( fs.existsSync(filePath) ) {
+        return res.render(slug);
+    }
+    else {
+        return notFoundError(req, res);
+    }
 });
 
-module.exports = app;
+module.exports = router;
