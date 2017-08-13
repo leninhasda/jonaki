@@ -30,7 +30,7 @@ app.use('/search', require('./routes/search'));
 // error handler
 // todo add custom error page
 app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError && err.status == 400) {
+    if (err instanceof SyntaxError &&  400 === err.status) {
         return res.sendStatus(400);
     }
     if (typeof err !== "undefined" && err !== null) {
@@ -60,4 +60,4 @@ process.on('exit', () => {
 module.exports = {
     app: app,
     server: server
-}
+};

@@ -1,7 +1,5 @@
 const YAML = require('js-yaml');
 
-let meta = {};
-
 module.exports = MetaParser;
 
 function MetaParser(md) {
