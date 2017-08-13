@@ -5,8 +5,9 @@ Simple markdown blog in node + express.
 ### Checklist
 - [x] add basic structure
 - [ ] index to list all post
-- [ ] single post
-- [ ] post with tag
+- [x] single post
+    - [ ] format date 
+    - [ ] with tag ?
 - [ ] archive ?
 - [ ] tag module
 - [ ] archive module
@@ -19,5 +20,7 @@ Simple markdown blog in node + express.
     - [ ] 500 error
 - [ ] custom error page
 - [ ] add test
-- [ ] md renderer
+    - [x] meta parser
+    - [x] md parser
+- [x] md renderer
 - [ ] admin maybe ??
