@@ -7,6 +7,8 @@ function MetaParser(md) {
     let data = [];
     let line = 0;
 
+    md = ("string" === typeof md) ? md.split('\n') : md;
+
     if ( ! md[line].match(/^---$/) ) {
         data = md;
     }
@@ -22,6 +24,6 @@ function MetaParser(md) {
 
     return {
         meta: YAML.safeLoad(metaData.join('\n')) || {},
-        content: data.join('\n')
+        content: (Array.isArray(data)) ? data.join('\n') : data.trim()
     };
 }

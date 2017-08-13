@@ -1,5 +1,5 @@
 const express = require('express');
-app = express.Router();
+const app = express.Router();
 
 // base uri: /
 app.get('/', (req, res, next) => {

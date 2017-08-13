@@ -10,6 +10,7 @@ router.get('/:slug', (req, res, next) => {
     let filePath = req.app.get('views') + '/' + slug + '.md';
 
     if ( fs.existsSync(filePath) ) {
+        // return res.sendfile(slug);
         return res.render(slug);
     }
     else {
