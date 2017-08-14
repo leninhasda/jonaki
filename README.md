@@ -6,9 +6,10 @@ Simple markdown blog in node + express.
 - [x] add basic structure
 - [ ] index to list all post
 - [x] single post
-    - [ ] format date 
+    - [ ] format date
     - [ ] with tag ?
 - [ ] archive ?
+- [ ] add node-cache cache
 - [ ] tag module
 - [ ] archive module
 - [ ] searching
