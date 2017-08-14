@@ -10,11 +10,11 @@ const jonakRender = require('./utils/jonak-render');
 const app = express();
 
 app.engine('md', jonakRender(app));
-app.set('views', __dirname + '/posts');
+app.set('views', __dirname + '/resources');
 app.set('view engine', 'md');
 // app.set('view engine', require('pug'));
 app.use(bodyParser.json());
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname+'/resources/assets'));
 
 // url logger
 // app.use((req, res, next) => {

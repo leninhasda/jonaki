@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+    h1=meta.title
+    section
+        !=content
+        each post in data.allPosts
+            h3
+                a(href='/post/' + post.link)=post.title.replace('-' / g, ' ').toUpperCase()
