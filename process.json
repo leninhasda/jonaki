@@ -10,7 +10,7 @@
       ".gitignore",
       ".idea",
       ".git",
-      "*.md"
+      "/**/*.md"
     ]
   }]
 }

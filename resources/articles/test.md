@@ -1,5 +1,5 @@
 ---
-title: Test Title
+title: Test Title Edited
 template: templates/post.pug
 date: 2017-08-15
 author: Lenin Hasda

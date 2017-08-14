@@ -30,13 +30,14 @@ app.get('/', (req, res, next) => {
 
             if (md.length) {
                 let meta = meteParser(md).meta;
-                let link = meta.link || filename.split(' ').join('-').toLowerCase().replace('.md', '');
+                let link = meta.link || filename.toLowerCase().replace('.md', '');
                 if ( ! check.isUrl(link) && '/' !== link[0]) {
-                    link = '/post/' + link;
+                    // link = '/post/' + link;
+                    link = '/'+env('postRoute', 'post')+'/' + link;
                 }
                 let postMeta = {
                     created_at: fileStat.birthtime,
-                    unix: moment(fileStat.birthtime).unix(),
+                    unix: moment(meta.date || fileStat.birthtime).unix(),
                     link: link,
                     filename: filename,
                     title: meta.title || filename.replace('.md', '').replace('-', ' '),
@@ -49,7 +50,7 @@ app.get('/', (req, res, next) => {
         }
     });
 
-    posts.sort((a,b) => a.unix > b.unix)
+    posts.sort((a,b) => a.unix < b.unix)
 
     return res.render( pageDir + '/index.md', {
         posts: posts

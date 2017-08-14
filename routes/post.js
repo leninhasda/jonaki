@@ -3,15 +3,18 @@ const express = require('express');
 const router = express.Router();
 
 const notFoundError = require('../utils/404-not-found');
+const env = require('../utils/env-parse');
 
 router.get('/:slug', (req, res, next) => {
-    let slug = req.params.slug.trim();
+    let filename = req.params.slug.trim();
 
-    let filePath = req.app.get('views') + '/' + slug + '.md';
+    let postsDir = env('postDir', 'posts');
+    let postsDirFull = req.app.get('views') + '/' + postsDir;
+
+    let filePath =`${postsDirFull}/${filename}.md`;
 
     if ( fs.existsSync(filePath) ) {
-        // return res.sendfile(slug);
-        return res.render(slug);
+        return res.render(`${postsDir}/${filename}`);
     }
     else {
         return notFoundError(req, res);
