@@ -3,6 +3,14 @@ const YAML = require('js-yaml');
 module.exports = MetaParser;
 
 function MetaParser(md) {
+
+    if (md.length <= 0) {
+        return {
+            meta: {},
+            content: ""
+        };
+    }
+
     let metaData = [];
     let data = [];
     let line = 0;
