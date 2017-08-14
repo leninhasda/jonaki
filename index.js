@@ -12,7 +12,6 @@ const app = express();
 app.engine('md', jonakRender(app));
 app.set('views', __dirname + '/resources');
 app.set('view engine', 'md');
-// app.set('view engine', require('pug'));
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/resources/assets'));
 

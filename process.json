@@ -4,12 +4,13 @@
     "script": "run.sh",
     "watch": true,
     "ignore_watch": [
-        "node_modules",
-        "*.log",
-        "*.lock",
-        ".gitignore",
-        ".idea",
-        ".git"
-    ],
+      "node_modules",
+      "*.log",
+      "*.lock",
+      ".gitignore",
+      ".idea",
+      ".git",
+      "*.md"
+    ]
   }]
 }
