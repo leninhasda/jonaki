@@ -2,9 +2,10 @@ const fs = require('fs');
 const express = require('express');
 const moment = require('moment');
 const path = require('path');
+const memCache = require('memory-cache');
 const app = express.Router();
 
-const env = require('../utils/env-parse');
+const config = require('../utils/env-parse');
 const meteParser = require('../utils/meta-parser');
 const check = require('../utils/check');
 
@@ -12,7 +13,7 @@ const check = require('../utils/check');
 app.get('/', (req, res, next) => {
 
     // post dir
-    let postsDir = env('postDir', 'posts');
+    let postsDir = config('postDir', 'posts');
     postsDir = req.app.get('views') + '/' + postsDir;
 
     let pageDir = 'page';
@@ -21,35 +22,43 @@ app.get('/', (req, res, next) => {
     let posts = [];
 
     files.forEach( filename => {
-        // todo set node-cache
-        let filePath =`${postsDir}/${filename}`;
-        let fileStat = fs.lstatSync(filePath);
+        let postMeta = memCache.get(filename);
 
-        if (fileStat.isFile() && filename.indexOf('.md') > -1) {
-            let md = fs.readFileSync(filePath, 'utf8');
+        if (null === postMeta) {
+            let filePath =`${postsDir}/${filename}`;
+            let fileStat = fs.lstatSync(filePath);
 
-            if (md.length) {
-                let meta = meteParser(md).meta;
-                let link = meta.link || filename.toLowerCase().replace('.md', '');
-                if ( ! check.isUrl(link) && '/' !== link[0]) {
-                    // link = '/post/' + link;
-                    link = '/'+env('postRoute', 'post')+'/' + link;
+            if (fileStat.isFile() && filename.indexOf('.md') > -1) {
+                let md = fs.readFileSync(filePath, 'utf8');
+
+                if (md.length) {
+                    let meta = meteParser(md).meta;
+                    let link = meta.link || filename.toLowerCase().replace('.md', '');
+
+                    if ( ! check.isUrl(link) && '/' !== link[0]) {
+                        link = '/' + config('postRoute', 'post') + '/' + link;
+                    }
+                    postMeta = {
+                        created_at: fileStat.birthtime,
+                        unix: moment(meta.date || fileStat.birthtime).unix(),
+                        link: link,
+                        filename: filename,
+                        title: meta.title || filename.replace('.md', '').replace('-', ' '),
+                        date: moment(meta.date || fileStat.birthtime).format(config('dateFormat', 'D MMM YYYY')),
+                        author: meta.author || "",
+                        tags: meta.tags ? (meta.tags.split(',').map(tag => tag.trim()) || []) : []
+                    };
+                    // cache data for 1 day
+                    memCache.put(filename, postMeta, 1000*60*24);
                 }
-                let postMeta = {
-                    created_at: fileStat.birthtime,
-                    unix: moment(meta.date || fileStat.birthtime).unix(),
-                    link: link,
-                    filename: filename,
-                    title: meta.title || filename.replace('.md', '').replace('-', ' '),
-                    date: moment(meta.date || fileStat.birthtime).format(env('dateFormat', 'D MMM YYYY')),
-                    author: meta.author || "",
-                    tags: meta.tags ? (meta.tags.split(',').map(tag => tag.trim()) || []) : []
-                };
-                posts.push(postMeta);
             }
+        }
+        if (postMeta) {
+            posts.push(postMeta);
         }
     });
 
+    // order by date
     posts.sort((a,b) => a.unix < b.unix)
 
     return res.render( pageDir + '/index.md', {

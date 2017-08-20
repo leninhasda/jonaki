@@ -2,6 +2,9 @@ extends base.pug
 
 block content
 
+    div
+        !=content
+
     div(class="row marketing")
         div(class="col-lg-12")
             each post,cnt in data.posts

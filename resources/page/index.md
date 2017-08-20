@@ -8,7 +8,3 @@ menu:
       link: /
 search: true
 ---
-learner, passionate programmer, hobbyist research
-
-
-

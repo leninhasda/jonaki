@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="description" content="")
+    meta(name="author" content="")
+    title=meta.title
+    link(href="/css/bootstrap.min.css" rel="stylesheet")
+    link(href="/css/narrow-jumbotron.css" rel="stylesheet")
+  body(style="background: #f9f9f9")
+    div(class="container")
+      div(class="header clearfix")
+        nav
+          ul(class="nav nav-pills float-right")
+            each item,cnt in meta.menu
+              li(class="nav-item")
+                a(class="nav-link" href=item.link)=item.name
+        h3(class="text-muted" style="font-weight: 700")=meta.title
+
+      block content
+
+      footer(class="footer")
+        p!="Powered by Jonaki"
+
