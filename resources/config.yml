@@ -1,0 +1,17 @@
+siteTitle: lenin's blog
+dateFormat: D MMM YYYY
+perPage: 5
+postDir: articles
+templateDir: themes/theme-5
+
+# add menu items
+menu:
+  - name: blog
+    link: /
+  - name: root
+    link: /root
+
+# these are the config you don't want to change too often
+postRoute: post
+tagRoute: tags
+searchRoute: search

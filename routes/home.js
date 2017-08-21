@@ -5,7 +5,7 @@ const path = require('path');
 const memCache = require('memory-cache');
 const app = express.Router();
 
-const config = require('../utils/env-parse');
+const config = require('../utils/config');
 const meteParser = require('../utils/meta-parser');
 const check = require('../utils/check');
 
@@ -62,7 +62,8 @@ app.get('/', (req, res, next) => {
     posts.sort((a,b) => a.unix < b.unix)
 
     return res.render( pageDir + '/index.md', {
-        posts: posts
+        posts: posts,
+        config: config()
     });
 });
 

@@ -6,7 +6,7 @@ const logger = require('./utils/logger');
 
 const notFoundError = require('./utils/404-not-found');
 const jonakRender = require('./utils/jonak-render');
-const env = require('./utils/env-parse');
+const config = require('./utils/config');
 
 const app = express();
 
@@ -21,9 +21,9 @@ app.use(express.static(__dirname+'/resources/assets'));
 //     logger.info(req.methd+' '+req.path);
 //     next();
 // });
-let postRoute = env('postRoute', 'post'),
-    tagRoute = env('tagRoute', 'tags'),
-    searchRoute = env('searchRoute', 'search');
+let postRoute = config('postRoute', 'post'),
+    tagRoute = config('tagRoute', 'tags'),
+    searchRoute = config('searchRoute', 'search');
 // app routes
 app.use('/',       require('./routes/home'));
 app.use('/'+postRoute,   require('./routes/post'));

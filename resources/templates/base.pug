@@ -13,12 +13,9 @@ html(lang="en")
       div(class="header clearfix")
         nav
           ul(class="nav nav-pills float-right")
-            each item,cnt in meta.menu
+            each item,cnt in data.config.menu
               li(class="nav-item")
                 a(class="nav-link" href=item.link)=item.name
-            if meta.search
-              li(class="nav-item")
-                a(class="nav-link" href="/search")="search"
         h3(class="text-muted" style="font-weight: 700")=meta.title
 
       block content

@@ -2,7 +2,7 @@
   "apps": [{
     "name": "jonaki",
     "script": "run.sh",
-    "watch": true,
+    "watch": ["*", "resources/config.yml"],
     "ignore_watch": [
       "node_modules",
       "*.log",
@@ -10,7 +10,8 @@
       ".gitignore",
       ".idea",
       ".git",
-      "/**/*.md"
+      "resources/*",
+      "!resources/config.yml",
     ]
   }]
 }
