@@ -23,7 +23,10 @@ app.get('/', (req, res, next) => {
 
     files.forEach( filename => {
         let postMeta = memCache.get(filename);
-
+        let useCache = config('cache', true);
+        if( ! useCache) {
+            memCache.clear();
+        }
         if (null === postMeta) {
             let filePath =`${postsDir}/${filename}`;
             let fileStat = fs.lstatSync(filePath);
