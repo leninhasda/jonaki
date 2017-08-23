@@ -4,17 +4,19 @@ Simple markdown blog in node + express.
 
 ### Checklist
 - [x] add basic structure
-- [ ] index to list all post
+- [x] index to list all post
 - [x] single post
-    - [ ] format date
+    - [x] format date
     - [ ] with tag ?
 - [ ] archive ?
 - [ ] add node-cache cache
+    - [x] added memory-cache
+    - [ ] switch to sqlite ?
 - [ ] tag module
 - [ ] archive module
 - [ ] searching
 - [ ] seo
-- [ ] theming
+- [x] theming
 - [ ] auto fetch md files
 - [ ] custom error handling
     - [x] 404 error

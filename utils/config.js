@@ -10,7 +10,7 @@ try {
     _params = YAML.safeLoad(configData) || {};
 }
 catch(error) {
-    console.log(error)
+    // console.log(error)
     throw new Error("No config file");
 }
 
