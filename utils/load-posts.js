@@ -15,18 +15,8 @@ function loadPostsObj(app) {
     let all = loadPosts(app);
     let posts = {};
     Object.keys(all).forEach(link => {
-        // posts.push(all[link].value)
         posts[link] = all[link].value;
-        // console.log(p[link])
-        // console.log(all.link)
-        // posts[link] = all[link].value;
     });
-    // for(let k in all) {
-    //     p[k] = all[k];
-    // }
-    // return all;
-    // return p;
-    // return {x:p, p:posts};
     return posts;
 }
 

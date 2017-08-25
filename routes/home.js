@@ -10,13 +10,16 @@ const loadPosts = require('../utils/load-posts');
 app.get('/', (req, res, next) => {
     let pageDir = 'page';
     let posts = loadPosts.obj(req.app);
-    // order by date
-    // posts.sort((a,b) => a.unix < b.unix);
-    console.log(posts)
-    console.log(typeof posts)
+    let sortablePosts = [];
+
+    for(let k in posts) {
+        sortablePosts.push(posts[k]);
+    }
+
+    sortablePosts.sort((a,b) => a.unix < b.unix);
 
     return res.render( pageDir + '/index.md', {
-        posts: posts,
+        posts: sortablePosts,
         config: config()
     });
 });
