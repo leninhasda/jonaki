@@ -12,6 +12,7 @@ Simple markdown blog in node + express.
 - [ ] add node-cache cache
     - [x] added memory-cache
     - [ ] switch to sqlite ?
+- [ ] simple url management
 - [ ] tag module
 - [ ] archive module
 - [ ] searching
@@ -27,3 +28,4 @@ Simple markdown blog in node + express.
     - [x] md parser
 - [x] md renderer
 - [ ] admin maybe ??
+- [ ] single file ?
