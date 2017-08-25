@@ -1,5 +1,8 @@
 extends post-base.pug
 
 block content
+    header
+        h1(style="text-align:center; padding-bottom: 20px; border-bottom: 5px solid grey; margin-bottom: 20px;")
+            !=meta.title
     section(class="articles")
         !=content
