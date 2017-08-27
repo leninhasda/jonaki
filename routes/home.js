@@ -16,7 +16,11 @@ app.get('/', (req, res, next) => {
         sortablePosts.push(posts[k]);
     }
 
-    sortablePosts.sort((a,b) => a.unix < b.unix);
+    sortablePosts.sort((a,b) => {
+        if (a.unix > b.unix) return -1;
+        if (a.unix < b.unix) return 1;
+        return 0;
+    });
 
     return res.render( pageDir + '/index.md', {
         posts: sortablePosts,
